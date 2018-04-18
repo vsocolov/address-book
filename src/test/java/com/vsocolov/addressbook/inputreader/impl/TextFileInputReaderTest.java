@@ -10,7 +10,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,7 +41,7 @@ public class TextFileInputReaderTest {
     @Test
     public void getEntries_should_return_a_list_of_entries_if_inputh_path_is_valid() {
         final Path path = Paths.get(INPUT_SOURCE);
-        final Optional<AddressBookEntry> expectedEntry = Optional.of(new AddressBookEntry("John Doe", MALE, new Date()));
+        final Optional<AddressBookEntry> expectedEntry = Optional.of(new AddressBookEntry("John Doe", MALE, LocalDate.now()));
 
         when(addressBookEntryConverter.convert(any(String.class))).thenReturn(expectedEntry);
 

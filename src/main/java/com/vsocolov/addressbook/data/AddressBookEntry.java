@@ -1,7 +1,7 @@
 package com.vsocolov.addressbook.data;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class AddressBookEntry implements Serializable {
 
@@ -9,9 +9,9 @@ public class AddressBookEntry implements Serializable {
 
     private final Gender gender;
 
-    private final Date birthDate;
+    private final LocalDate birthDate;
 
-    public AddressBookEntry(final String name, final Gender gender, final Date birthDate) {
+    public AddressBookEntry(final String name, final Gender gender, final LocalDate birthDate) {
         this.name = name;
         this.gender = gender;
         this.birthDate = birthDate;
@@ -25,7 +25,7 @@ public class AddressBookEntry implements Serializable {
         return gender;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 }

@@ -5,19 +5,24 @@ import com.vsocolov.addressbook.data.AddressBookEntry;
 import com.vsocolov.addressbook.data.Gender;
 import org.apache.log4j.Logger;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.Year;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 import java.util.Optional;
 
 public class StringToAddressBookEntryConverter<T extends String> implements AddressBookEntryConverter<T> {
     private static final Logger LOG = Logger.getLogger(StringToAddressBookEntryConverter.class);
     private static final String COMMA = ",";
-    private static final String DATE_FORMAT = "dd/MM/yy";
+    private static final String DATE_FORMAT = "dd/MM/";
 
-    private final SimpleDateFormat formatter;
+    private final DateTimeFormatter formatter;
 
     public StringToAddressBookEntryConverter() {
-        formatter = new SimpleDateFormat(DATE_FORMAT);
+        formatter = new DateTimeFormatterBuilder().appendPattern(DATE_FORMAT)
+                .appendValueReduced(ChronoField.YEAR, 2, 2, Year.now().getValue() - 80)
+                .toFormatter();
     }
 
     @Override
@@ -26,7 +31,7 @@ public class StringToAddressBookEntryConverter<T extends String> implements Addr
             final String[] values = source.split(COMMA);
             final String name = values[0].trim();
             final Gender gender = Gender.toEnum(values[1].trim()).orElse(Gender.UNKNOWN);
-            final Date birthDate = formatter.parse(values[2].trim());
+            final LocalDate birthDate = LocalDate.parse(values[2].trim(), formatter);
 
             return Optional.of(new AddressBookEntry(name, gender, birthDate));
         } catch (final Exception e) {
