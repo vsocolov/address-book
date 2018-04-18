@@ -5,8 +5,6 @@ import com.vsocolov.addressbook.data.AddressBookEntry;
 import com.vsocolov.addressbook.inputreader.InputReader;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,7 +20,6 @@ import static org.hamcrest.core.IsCollectionContaining.hasItem;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
 public class TextFileInputReaderTest {
 
     private static final String INPUT_SOURCE = "src/test/resources/AddressBook";
