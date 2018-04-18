@@ -20,6 +20,7 @@ public class StringToAddressBookEntryConverter<T extends String> implements Addr
     private final DateTimeFormatter formatter;
 
     public StringToAddressBookEntryConverter() {
+        // used builder because in new java 8 Date API, two digit dates starts from 2000 year, but we need from 1900
         formatter = new DateTimeFormatterBuilder().appendPattern(DATE_FORMAT)
                 .appendValueReduced(ChronoField.YEAR, 2, 2, Year.now().getValue() - 80)
                 .toFormatter();
