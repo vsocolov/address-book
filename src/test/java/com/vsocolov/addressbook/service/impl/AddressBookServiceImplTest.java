@@ -19,6 +19,27 @@ public class AddressBookServiceImplTest {
     private final AddressBookService service = new AddressBookServiceImpl();
 
     @Test
+    public void search_should_search_entries_by_name() {
+        final List<AddressBookEntry> addressBook = addressBookStub();
+        final Predicate<AddressBookEntry> searchPredicate = entry -> entry.getName().equals("Sarah Stone");
+
+        final Optional<AddressBookEntry> entry = service.search(addressBook, searchPredicate);
+
+        assertThat(entry.isPresent(), equalTo(true));
+        assertThat(entry.get().getName(), equalTo("Sarah Stone"));
+    }
+
+    @Test
+    public void search_should_return_optional_empty_if_no_result_found() {
+        final List<AddressBookEntry> addressBook = addressBookStub();
+        final Predicate<AddressBookEntry> searchPredicate = entry -> entry.getName().equals("xyz");
+
+        final Optional<AddressBookEntry> entry = service.search(addressBook, searchPredicate);
+
+        assertThat(entry.isPresent(), equalTo(false));
+    }
+
+    @Test
     public void count_should_return_only_male_entries() {
         final List<AddressBookEntry> addressBook = addressBookStub();
         final Predicate<AddressBookEntry> filterPredicate = entry -> entry.getGender() == MALE;

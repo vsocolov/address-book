@@ -8,6 +8,8 @@ import java.util.function.Predicate;
 
 public interface AddressBookService {
 
+    Optional<AddressBookEntry> search(List<AddressBookEntry> addressBook, Predicate<AddressBookEntry> filterPredicate);
+
     long count(List<AddressBookEntry> addressBook, Predicate<AddressBookEntry> filterPredicate);
 
     Optional<AddressBookEntry> getOldestPerson(List<AddressBookEntry> addressBook);
