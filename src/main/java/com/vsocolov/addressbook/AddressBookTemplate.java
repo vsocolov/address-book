@@ -28,7 +28,7 @@ public abstract class AddressBookTemplate {
         System.out.println("Male entries in the address book: " + maleCounts);
 
         final Optional<AddressBookEntry> oldestPerson = extractOldestPerson(entries);
-        oldestPerson.ifPresent(person -> System.out.println("Oldestperson in the address book: " + person.getName()));
+        oldestPerson.ifPresent(person -> System.out.println("Oldest person in the address book: " + person.getName()));
 
         final Optional<AddressBookEntry> bill = searchEntryByName(entries, "Bill McKnight");
         final Optional<AddressBookEntry> paul = searchEntryByName(entries, "Paul Robinson");

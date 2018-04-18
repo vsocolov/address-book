@@ -13,6 +13,7 @@ public class MainApp {
         final AddressBookEntryConverter<String> converter = new StringToAddressBookEntryConverter<>();
         final InputReader inputReader = new TextFileInputReader(converter);
         final AddressBookService addressBookService = new AddressBookServiceImpl();
+
         final AddressBookTemplate addressBook = new AddressBook(inputReader, addressBookService);
 
         addressBook.printResults();
